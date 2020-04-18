@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 import {connect} from 'react-redux'
 import {handleInitialData} from '../actions/shared'
-
+import Home from './home'
 
 class App extends React.Component {
 
@@ -14,12 +14,21 @@ render(){
   return (
     <div >
         
-        hello
+         {this.props.loading === true
+          ? null
+          : <Home />}
 
+         
 
     </div>
   );
 }
 }
 
-export default connect()(App);
+function mapStateToProps ({ authedUser }) {
+  return {
+    loading: authedUser === null 
+  }
+}
+
+export default connect(mapStateToProps)(App) 
