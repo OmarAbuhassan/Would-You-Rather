@@ -18,6 +18,13 @@ export default function questions(state = {}, action) {
             ...state[action.id][action.answer],
             votes: state[action.id][action.answer].votes.concat([action.authedUser])
           }
+        },
+        [action.authedUser]: {
+          ...state[action.authedUser],
+          answers: {
+            ...state[action.authedUser].answers,
+            [action.id]: action.answer
+          }
         }
 
 
