@@ -3,6 +3,7 @@ import '../App.css';
 import {connect} from 'react-redux'
 import {handleInitialData} from '../actions/shared'
 import Home from './home'
+import LoadingBar from 'react-redux-loading'
 
 class App extends React.Component {
 
@@ -13,7 +14,7 @@ class App extends React.Component {
 render(){
   return (
     <div >
-        
+                <LoadingBar />
          {this.props.loading === true
           ? null
           : <Home />}
