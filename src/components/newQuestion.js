@@ -70,6 +70,7 @@ class NewQuestion extends React.Component {
                         value={question2}
                         onChange={this.handleChangeQuestion2}
                         className='textarea' />
+                        <p></p>
                     <button
                         className='btn'
                         disabled={question1 === '' || question2 === ''}

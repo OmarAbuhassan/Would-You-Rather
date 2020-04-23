@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { formatQuestion } from '../utils/helper'
 import { handleSaveAnswer } from '../actions/shared'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 
 
 class Question extends React.Component {
@@ -20,8 +20,7 @@ class Question extends React.Component {
     handleAnswer = (e) => {
         e.preventDefault()
         const { dispatch, question, authedUser } = this.props
-        console.log("im answering")
-        dispatch(handleSaveAnswer({
+         dispatch(handleSaveAnswer({
             authedUser,
             qid: question.id,
             answer: this.state.answer
@@ -32,12 +31,12 @@ class Question extends React.Component {
     render() {
         const { question } = this.props
 
-        if (question === null) {
-            return <p>This Question doesn't exist</p>
+        if (question === null || question === undefined) {
+            return this.props.history.push('/questions/bad_id');
         }
 
         const {
-            name, avatar, optionOneText, optionTwoText, hasAnswered, votOp1, votOp2,id,
+            name, avatar, optionOneText, optionTwoText, hasAnswered, votOp1, votOp2, id,
         } = question
 
         const totalVotes = votOp1 + votOp2
@@ -45,17 +44,14 @@ class Question extends React.Component {
         const percentQ2 = ((votOp2 / totalVotes) * 100).toFixed(2)
 
         const YourVoteLabel = () => (
-            // <Label color="orange" ribbon="right" className="vote">
-            //   <Icon name="check circle outline" size="big" className="compact" />
-              <div style={{ float: 'right' }}>
+            <div style={{ float: 'inherit' ,color:"green" }} font="green">
                 Your
                 <br />
                 Vote
-              </div>
-            // </Label>
-          );
-          console.log(this.props.user)
-          const userVote = this.props.user.answers[id];
+            </div>
+        );
+
+        const userVote = this.props.user.answers[id];
 
         if (hasAnswered === true) {
             return (
@@ -66,16 +62,20 @@ class Question extends React.Component {
                         alt={`Avatar of ${name}`}
                         className="avatar" />
                     <div>
-                    {userVote === 'optionOne' && <YourVoteLabel />}
+
                         <div>
+                            {userVote === 'optionOne' && <YourVoteLabel />}
                             <p>Would you rather {optionOneText} </p>
                             <p>{votOp1} out of {totalVotes} </p>
                             <p>{percentQ1}%</p>
                         </div>
-                        {userVote === 'optionTwo' && <YourVoteLabel />}
-                        <p>Would you rather {optionTwoText} </p>
-                        <p>{votOp2} out of {totalVotes} </p>
-                        <p>{percentQ2}%</p>
+                        <p>-----------------------------------------</p>
+                        <div>
+                            {userVote === 'optionTwo' && <YourVoteLabel />}
+                            <p>Would you rather {optionTwoText} </p>
+                            <p>{votOp2} out of {totalVotes} </p>
+                            <p>{percentQ2}%</p>
+                        </div>
                     </div>
                 </div >
             )
@@ -100,7 +100,7 @@ class Question extends React.Component {
                             <input onChange={(event) => this.onAnswerChanged(event.target.value)}
                                 type="radio" name="question" value="optionTwo" />
                             <label htmlFor={optionTwoText}> {optionTwoText}</label>
-
+<p></p>
                             <button
                                 className="btn"
                                 onClick={(e) => this.handleAnswer(e)}

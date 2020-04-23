@@ -27,8 +27,8 @@ class Home extends React.Component {
                 <button onClick={(True) => this.onAnswerChanged(True)}>Answered</button>
 
                 {this.state.showAnswered ?
-                    <List id="Answered" /> :
-                    <List id="Un Answered" />}
+                    <List id="Answered Questions" /> :
+                    <List id="Un Answered Questions" />}
 
             </div>
 

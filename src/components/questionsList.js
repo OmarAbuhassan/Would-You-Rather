@@ -15,9 +15,9 @@ class List extends React.Component {
             unAnsweredQuestions } = this.props;
 
         let questions = [];
-        if (this.props.id === "Answered") {
+        if (this.props.id === "Answered Questions") {
             questions = answeredQuestions
-        } else if (this.props.id === "Un Answered") {
+        } else if (this.props.id === "Un Answered Questions") {
             questions = unAnsweredQuestions
         }
 

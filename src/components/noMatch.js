@@ -5,7 +5,7 @@ export class NoMatch extends Component {
     return (
       <div textAlign="center">
         <h3>No Match 404 Error</h3>
-        <p>Nothing to see here. Please use the menu to try again.</p>
+        <p>Nothing to see here. Please try again.</p>
       </div>
     );
   }

@@ -19,10 +19,6 @@ export class Login extends Component {
                     form={<ConnectedLoginForm onLoading={this.handleLoading} />}
                     loading={this.state.loading}
                 />
-                <footer className="footer">
-                    <a href="https://www.freepik.com/free-photos-vectors/design">
-                    </a>
-                </footer>
             </div>
         );
     }
@@ -30,10 +26,9 @@ export class Login extends Component {
 
 const LoginHeader = () => (
     <div>
-    <h3  textAlign="center">
-        Welcome to the Would You Rather App!</h3>
-     <h4  textAlign="center">   Please sign in to continue
-    </h4></div>
+        <h3 >Welcome to the Would You Rather App!</h3>
+        <h4 >   Please sign in to continue </h4>
+    </div>
 );
 
 const LoginGridLayout = ({ image, form, loading }) => (
@@ -63,8 +58,7 @@ class LoginForm extends Component {
             value
         })
         )
-        console.log(this.state.value)
-    };
+     };
 
     handleSubmit = e => {
         e.preventDefault();
@@ -76,7 +70,7 @@ class LoginForm extends Component {
             setTimeout(() => res(), 500);
         }).then(() => setAuthedUser(authUser));
     };
-   
+
     render() {
         const { value } = this.state;
         const disabled = value !== 'none' ? false : true;
