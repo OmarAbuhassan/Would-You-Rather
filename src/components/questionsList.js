@@ -1,8 +1,7 @@
 import React from 'react';
 import QuestionSample from './questionSample'
 import { connect } from 'react-redux'
-import Question from './question'
- 
+
 
 class List extends React.Component {
 
@@ -16,24 +15,23 @@ class List extends React.Component {
             unAnsweredQuestions } = this.props;
 
         let questions = [];
-        if (this.props.id === "answered") {
+        if (this.props.id === "Answered") {
             questions = answeredQuestions
-        } else if (this.props.id === "unAnswered") {
+        } else if (this.props.id === "Un Answered") {
             questions = unAnsweredQuestions
         }
 
         return (
             <div >
-
+                <h3>{this.props.id}</h3>
                 {questions.map(id =>
 
                     <li key={id}>
-                        <Question id={id} />
+                        <QuestionSample id={id} />
 
                     </li>
 
                 )}
-
 
             </div>
         );
@@ -42,7 +40,8 @@ class List extends React.Component {
 
 function mapStateToProps({ authedUser, users, questions }) {
 
-     return {
+
+    return {
         users,
         authedUser,
         answeredQuestions: Object.keys(questions).sort((a, b) => questions[b].timestamp - questions[a].timestamp).filter(a => questions[a].optionOne.votes.includes(authedUser) ||

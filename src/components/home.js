@@ -4,30 +4,38 @@ import List from './questionsList'
 
 class Home extends React.Component {
 
+    state = {
+        showAnswered: false
+    }
+    onAnswerChanged = (e) => {
+
+        this.setState({
+            showAnswered: e
+        });
+    }
+
 
 
 
     render() {
+
  
-
-
         return (
             <div >
-                <h1>Un answerd</h1>
-                <List id="unAnswered"
-                    />
 
-                <div >
-                    <h1>Answerd</h1>
-                    <List id="answered"
-                         />
-                </div>
+                <button onClick={(True) => this.onAnswerChanged(!True)}>Un Answered</button>
+                <button onClick={(True) => this.onAnswerChanged(True)}>Answered</button>
+
+                {this.state.showAnswered ?
+                    <List id="Answered" /> :
+                    <List id="Un Answered" />}
+
             </div>
 
         );
     }
 }
 
- 
 
-export default  Home;
+
+export default Home;

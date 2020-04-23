@@ -1,34 +1,62 @@
-import React from 'react';
 import '../App.css';
-import {connect} from 'react-redux'
-import {handleInitialData} from '../actions/shared'
+import { connect } from 'react-redux'
+import { handleInitialData } from '../actions/shared'
 import Home from './home'
 import LoadingBar from 'react-redux-loading'
+import React, { Component, Fragment } from 'react'
+import { BrowserRouter as Router, Route,Switch } from 'react-router-dom'
+import Nav from './nav'
+import Leader from './leaderBoard'
+import NewQuestion from './newQuestion'
+import Question from './question'
+import Login from './login';
+import NoMatch from './noMatch';
 
-class App extends React.Component {
+
+class App extends Component {
 
   componentDidMount() {
     this.props.dispatch(handleInitialData())
   }
 
-render(){
-  return (
-    <div >
-                <LoadingBar />
-         {this.props.loading === true
-          ? null
-          : <Home />}
+  render() {
+    return (
 
-         
+      <Router>
+        {this.props.authedUser === null ? (
+          <Route
+            render={() => (
 
-    </div>
-  );
+              <Login />
+
+            )}
+          />
+        ) : (
+            <Fragment>
+              <LoadingBar />
+              <div >
+                <Nav />
+               <Switch >
+                    <Route exact path='/' component={Home} />
+                    <Route path='/leaderboard' component={Leader} />
+                    <Route path='/add' component={NewQuestion} />
+                    <Route path='/questions/:id' component={Question} />
+                    <Route component={NoMatch} />
+
+                  </Switch >
+              </div>
+            </Fragment>
+          )
+        }
+      </Router>
+    );
+  }
 }
-}
 
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps({ authedUser }) {
   return {
-    loading: authedUser === null 
+    authedUser,
+    loading: authedUser === null
   }
 }
 
