@@ -10,9 +10,9 @@ The project is part of React nano-dgree provided from Udacity.
 ## Installation
 Clone the repository, change directories, and use NPM to install the dependencies.
 
-`$ git clone https://github.com/OmarAbuhassan/Would-You-Rather
-$ cd MyReads-A-Book-Traking-React-App
-$ npm install`
+`$ git clone https://github.com/OmarAbuhassan/Would-You-Rather`
+`$ cd MyReads-A-Book-Traking-React-App`
+`$ npm install`
 
 
 ## Important
