@@ -1,17 +1,17 @@
-import React from 'react';
+import React,{Component} from 'react';
 import { connect } from 'react-redux'
 import { formatQuestion } from '../utils/helper'
-import { handleSaveAnswer } from '../actions/shared'
-import { withRouter, Redirect } from 'react-router-dom'
+import { handleSaveAnswer } from '../actions/Shared'
+import { withRouter } from 'react-router-dom'
 
 
-class Question extends React.Component {
+class Question extends Component {
 
     state = {
         answer: ''
     }
-    onAnswerChanged = (e) => {
 
+    onAnswerChanged = (e) => {
         this.setState({
             answer: e
         });
@@ -27,8 +27,8 @@ class Question extends React.Component {
         }))
     }
 
-
     render() {
+        
         const { question } = this.props
 
         if (question === null || question === undefined) {
@@ -44,9 +44,9 @@ class Question extends React.Component {
         const percentQ2 = ((votOp2 / totalVotes) * 100).toFixed(2)
 
         const YourVoteLabel = () => (
-            <div style={{ float: 'inherit' ,color:"green" }} font="green">
+            <div style={{ float: 'inherit' ,color:"green" }} font="green" >
                 Your
-                <br />
+                <br/>
                 Vote
             </div>
         );
@@ -56,13 +56,12 @@ class Question extends React.Component {
         if (hasAnswered === true) {
             return (
                 <div>
-                    <p>{name} asks: </p>
+                    <p>{name} asks:</p>
                     <img
                         src={avatar}
                         alt={`Avatar of ${name}`}
                         className="avatar" />
                     <div>
-
                         <div>
                             {userVote === 'optionOne' && <YourVoteLabel />}
                             <p>Would you rather {optionOneText} </p>
@@ -77,21 +76,18 @@ class Question extends React.Component {
                             <p>{percentQ2}%</p>
                         </div>
                     </div>
-                </div >
+                </div>
             )
 
         } else if (hasAnswered === false) {
-
             return (
                 <div >
-
                     <p>{name} asks: </p>
                     <img
                         src={avatar}
                         alt={`Avatar of ${name}`}
                         className="avatar" />
                     <h4>Would you Rather ...</h4>
-
                     <div>
                         <form id="answer">
                             <input onChange={(event) => this.onAnswerChanged(event.target.value)}
@@ -100,7 +96,7 @@ class Question extends React.Component {
                             <input onChange={(event) => this.onAnswerChanged(event.target.value)}
                                 type="radio" name="question" value="optionTwo" />
                             <label htmlFor={optionTwoText}> {optionTwoText}</label>
-<p></p>
+                            <p></p>
                             <button
                                 className="btn"
                                 onClick={(e) => this.handleAnswer(e)}
@@ -117,13 +113,14 @@ class Question extends React.Component {
 
 function mapStateToProps({ authedUser, users, questions }, props) {
     const { id } = props.match.params
-    const question = questions[id]
     const user = users[authedUser]
+    const question = questions[id]
     return {
-        user,
         authedUser,
-        question: question ? formatQuestion(question, users[question.author], authedUser)
-            : null,
+        user,
+        question: question ?
+        formatQuestion(question, users[question.author], authedUser)
+        : null,
     }
 }
 

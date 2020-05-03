@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setAuthedUser } from '../actions/authedUser';
+import { setAuthedUser } from '../actions/AuthedUser';
 
 export class Login extends Component {
+    
     state = {
         loading: false
-    };
+    }
+
     handleLoading = () => {
         this.setState({ loading: true });
-    };
+    }
 
     render() {
         return (
@@ -26,23 +28,17 @@ export class Login extends Component {
 
 const LoginHeader = () => (
     <div>
-        <h3 >Welcome to the Would You Rather App!</h3>
-        <h4 >   Please sign in to continue </h4>
+        <h2 >Would You Rather ???</h2>
+        <h4 >Please sign in to continue</h4>
     </div>
 );
 
-const LoginGridLayout = ({ image, form, loading }) => (
+const LoginGridLayout = ({ form, loading }) => (
     <div>
-
         {loading === true}
-        {image}
-        <br />
         {form}
-
     </div>
 );
-
-
 
 class LoginForm extends Component {
     static propTypes = {
@@ -51,14 +47,6 @@ class LoginForm extends Component {
     state = {
         value: 'none'
     };
-
-
-    onChange = (value) => {
-        this.setState(() => ({
-            value
-        })
-        )
-     };
 
     handleSubmit = e => {
         e.preventDefault();
@@ -71,46 +59,40 @@ class LoginForm extends Component {
         }).then(() => setAuthedUser(authUser));
     };
 
+    onChange = (e) => {
+        this.setState(() => ({
+            value: e
+        }))
+    };
+
     render() {
+        const { users } = this.props;
         const { value } = this.state;
         const disabled = value !== 'none' ? false : true;
-        const { users } = this.props;
+
 
         return (
             <div>
-                <h2 color="green">
-                    Sign In
-                </h2>
+                <h2 color="green">Sign In</h2>
 
                 <form>
                     <select value={this.state.value} onChange={(e) => this.onChange(e.target.value)}>
                         <option value="none" disabled>Select a user</option>
-                        {
-
-                            users.map(user => (
-                                <option
-                                    key={user.id}
-                                    value={user.id}
-                                >
-                                    {user.name}
-                                </option>
-                            ))
-                        }
-
+                        {users.map(user => (
+                            <option key={user.id} value={user.id}>
+                                {user.name}
+                            </option>
+                        ))}
                     </select>
                 </form>
-                <button
-                    className="btn"
-                    onClick={(e) => this.handleSubmit(e)}
-                    disabled={disabled}>
+
+                <button className="btn" onClick={(e) => this.handleSubmit(e)} disabled={disabled}>
                     Submit
-                            </button>
+                </button>
             </div>
         );
     }
 }
-
-
 
 const ConnectedLoginForm = connect(
     mapStateToProps,

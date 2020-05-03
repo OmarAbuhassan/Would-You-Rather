@@ -1,10 +1,24 @@
 # Would You Rather Project
 
-This is the starter code for the final assessment project for Udacity's React & Redux course.
+Would You Rather Project, is a React & Redux application allows you to play Would you rather game with your Friends.
 
-The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
+Would you rather is a game that allows you to ask your Friends, answer to the questions, and view the Leader Board that generated automatically.
 
-Using the provided starter code, you'll build a React/Redux front end for the application. We recommend using the [Create React App](https://github.com/facebook/create-react-app) to bootstrap the project.
+The project is part of React nano-dgree provided from Udacity. 
+
+
+## Installation
+Clone the repository, change directories, and use NPM to install the dependencies.
+
+`$ git clone 
+$ cd MyReads-A-Book-Traking-React-App
+$ npm install`
+
+
+## Important
+
+The `_DATA.js` file represents a fake database and methods that let you access the data.
+
 
 ## Data
 
@@ -12,6 +26,7 @@ There are two types of objects stored in our database:
 
 * Users
 * Questions
+
 
 ### Users
 
@@ -25,6 +40,7 @@ Users include:
 | questions | Array | A list of ids of the polling questions this user created|
 | answers      | Object         |  The object's keys are the ids of each question this user answered. The value of each key is the answer the user selected. It can be either `'optionOne'` or `'optionTwo'` since each question has two options.
 
+
 ### Questions
 
 Questions include:
@@ -36,6 +52,7 @@ Questions include:
 | timestamp | String | The time when the question was created|
 | optionOne | Object | The first voting option|
 | optionTwo | Object | The second voting option|
+
 
 ### Voting Options
 
@@ -94,6 +111,7 @@ Your code will talk to the database via 4 methods:
 | authedUser | String | The id of the user who answered the question|
 | qid | String | The id of the question that was answered|
 | answer | String | The option the user selected. The value should be either `"optionOne"` or `"optionTwo"`|
+
 
 ## Contributing
 

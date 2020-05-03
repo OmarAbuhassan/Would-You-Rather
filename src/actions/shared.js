@@ -1,11 +1,10 @@
 
 import { saveQuestionAnswer, getInitialData } from '../utils/api'
-import { receiveUsers } from './users'
-import { receiveQuestions } from './questions'
+import { receiveUsers } from './Users'
+import { receiveQuestions,saveAnswer } from './Questions'
 import { showLoading, hideLoading } from 'react-redux-loading'
-import { saveUserAnswer } from './users'
-import { saveAnswer } from './questions'
-
+import { saveUserAnswer } from './Users'
+ 
  
 export function handleInitialData() {
   return (dispatch) => {

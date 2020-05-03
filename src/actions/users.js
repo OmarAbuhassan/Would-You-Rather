@@ -1,21 +1,22 @@
-export const RECEIVE_USERS = 'RECEIVE_USERS'
-export const USERS_ANSWER = 'USERS_ANSWER'
-export const ADD_QUESTION_TO_USER = 'ADD_QUESTION_TO_USER';
+export const receive_users = 'receive_users'
+export const user_answer = 'user_answer'
+export const add_q_to_user = 'add_q_to_user';
 
 
 export function receiveUsers(users) {
   return {
-    type: RECEIVE_USERS,
     users,
+    type: receive_users,
+    
   }
 }
 
 export function saveUserAnswer({ authedUser, qid, answer }) {
   return {
-    type: USERS_ANSWER,
     authedUser,
+    type: user_answer,
     qid,
-    answer
+    answer,
 
   }
 
@@ -23,8 +24,9 @@ export function saveUserAnswer({ authedUser, qid, answer }) {
 
 export function addQuestionToUser({ id, author }) {
   return {
-    type: ADD_QUESTION_TO_USER,
     id,
-    author
+    author,
+    type: add_q_to_user,
+    
   };
 }
