@@ -1,14 +1,16 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { formatQuestion } from '../utils/helper'
 import { handleSaveAnswer } from '../actions/Shared'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
+ 
+
 
 
 class Question extends Component {
 
     state = {
-        answer: ''
+        answer: '',
     }
 
     onAnswerChanged = (e) => {
@@ -20,7 +22,7 @@ class Question extends Component {
     handleAnswer = (e) => {
         e.preventDefault()
         const { dispatch, question, authedUser } = this.props
-         dispatch(handleSaveAnswer({
+        dispatch(handleSaveAnswer({
             authedUser,
             qid: question.id,
             answer: this.state.answer
@@ -28,11 +30,11 @@ class Question extends Component {
     }
 
     render() {
-        
-        const { question } = this.props
 
-        if (question === null || question === undefined) {
-            return this.props.history.push('/questions/bad_id');
+        const { question  } = this.props
+
+        if (question === null) {
+            return <Redirect from='*' to='/not-found' />
         }
 
         const {
@@ -44,9 +46,9 @@ class Question extends Component {
         const percentQ2 = ((votOp2 / totalVotes) * 100).toFixed(2)
 
         const YourVoteLabel = () => (
-            <div style={{ float: 'inherit' ,color:"green" }} font="green" >
+            <div style={{ float: 'inherit', color: "green" }} font="green" >
                 Your
-                <br/>
+                <br />
                 Vote
             </div>
         );
@@ -118,9 +120,11 @@ function mapStateToProps({ authedUser, users, questions }, props) {
     return {
         authedUser,
         user,
+        questionIds: Object.keys(questions),
         question: question ?
-        formatQuestion(question, users[question.author], authedUser)
-        : null,
+            formatQuestion(question, users[question.author], authedUser)
+            : null,
+            
     }
 }
 

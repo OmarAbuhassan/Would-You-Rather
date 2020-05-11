@@ -43,7 +43,6 @@ class App extends React.Component {
                   <Route exact path='/questions/bad_id' component={NoMatch} />
                   <Route exact path='/questions/:id' component={Question} />
                   <Route exact path='/leaderboard' component={Leader} />
-                  
                   <Route component={NoMatch} />
 
                 </Switch >
